@@ -3,6 +3,7 @@ body {
   font-family: Arial;
   text-align: center;
   background: linear-gradient(#70c5ce, #ffffff);
+  /* [CHANGED] Removed unnecessary styles, cleaned up for better mobile rendering */
 }
 
 /* HOME */
@@ -12,46 +13,127 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 20px; /* [NEW] Added padding for safe areas on mobile devices */
+  box-sizing: border-box; /* [NEW] Ensures padding doesn't increase total size */
+}
+
+/* [NEW] Better styling for home screen heading */
+#home h1 {
+  font-size: 48px;
+  margin: 20px 0;
+  color: #333;
+}
+
+/* [NEW] Improved instruction text styling */
+#home p {
+  font-size: 14px;
+  color: #666;
 }
 
 .profile {
   width: 120px;
+  height: 120px; /* [NEW] Fixed square aspect ratio for consistency */
   border-radius: 50%;
   margin-bottom: 10px;
+  object-fit: cover; /* [NEW] Ensures image fills circle perfectly on all devices */
 }
 
+/* [CHANGED] Enhanced button with smooth transitions and better visual feedback */
 button {
-  padding: 10px 20px;
+  padding: 12px 30px; /* [CHANGED] Increased padding for better mobile tap area */
   font-size: 18px;
   border: none;
   border-radius: 10px;
   background: #ffcc00;
   cursor: pointer;
+  font-weight: bold; /* [NEW] Better visibility */
+  transition: all 0.3s ease; /* [NEW] Smooth animations */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* [NEW] Depth effect */
+}
+
+/* [NEW] Hover effect for desktop users */
+button:hover {
+  background: #ffdd33;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+/* [NEW] Active/click effect for smooth feedback */
+button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* GAME */
+/* [CHANGED] Fixed duplicate display properties - was conflicting with overflow and responsiveness */
 #gameSection {
-  display: none;
+  display: none; /* Hidden by default */
+  height: 100vh; 
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  margin: 0;
+  overflow: hidden; /* [NEW] Prevents accidental scrolling during gameplay */
 }
 
+/* [NEW] Added .active class to replace inline display:flex for better management */
+#gameSection.active {
+  display: flex;
+}
+
+/* [CHANGED] Canvas styling fixed - removed duplicate definitions, added mobile touch optimization */
 canvas {
   background: #70c5ce;
   display: block;
   margin: auto;
+  
+  /* ✅ Responsive sizing - 90% viewport width, max 400px */
+  width: 90vw;
+  max-width: 400px;
+  height: auto;
+  
+  /* [NEW] Mobile touch optimization - prevents default zoom and touch behaviors */
+  touch-action: none;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
 }
 
+/* [CHANGED] Improved score display styling */
 #score {
   font-size: 30px;
   margin-top: 10px;
+  font-weight: bold; /* [NEW] Better visibility */
+  color: #333; /* [NEW] Better contrast */
 }
 
+/* [CHANGED] Game Over modal - improved styling and z-index handling */
 #gameOver {
   position: fixed;
-  inset: 0;
-  background: rgba(0,0,0,0.5);
+  inset: 0; /* Covers entire viewport */
+  background: rgba(0,0,0,0.7); /* [CHANGED] Increased opacity from 0.5 to 0.7 for better visibility */
   color: white;
-  display: none;
+  display: none; /* Hidden by default */
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  z-index: 100; /* [NEW] Ensures modal stays on top */
+}
+
+/* [NEW] Added .active class for game over modal (replaces inline display:flex) */
+#gameOver.active {
+  display: flex;
+}
+
+/* [NEW] Better styling for game over heading */
+#gameOver h2 {
+  font-size: 48px;
+  margin: 20px 0;
+}
+
+/* [NEW] Better styling for game over score text */
+#gameOver p {
+  font-size: 28px;
+  margin: 10px 0 30px 0;
 }

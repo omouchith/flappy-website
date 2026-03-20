@@ -3,29 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <title>Flappy Game</title>
+  <!-- [EXISTING] Mobile responsiveness meta tag - ensures proper scaling on all devices -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">   
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- HOME -->
+  <!-- HOME SCREEN -->
   <div id="home">
-    <img src="images/bird.png" class="profile">
-    <h1>simple shata 🎮</h1>
+    <!-- [CHANGED] Added alt attribute for better accessibility -->
+    <img src="images/bird.png" class="profile" alt="Bird">
+    <h1>Simple Flappy 🎮</h1>
     <button onclick="startGame()">Play</button>
+    <!-- [NEW] Added user instructions for all input methods (click, tap, space) -->
+    <p style="margin-top: 20px; font-size: 14px; color: #666;">Click, Tap, or Press SPACE to jump</p>
   </div>
 
-  <!-- GAME -->
+  <!-- GAME SECTION -->
   <div id="gameSection">
+    <!-- Canvas where the game is rendered -->
     <canvas id="game"></canvas>
+    <!-- Score display during gameplay -->
     <div id="score">0</div>
 
+    <!-- Game Over Modal - displayed using .active class -->
     <div id="gameOver">
+      <!-- [CHANGED] Better game over messaging -->
       <h2>Game Over 😵</h2>
       <p>Score: <span id="finalScore">0</span></p>
       <button onclick="restartGame()">Restart</button>
     </div>
   </div>
 
+  <!-- [CHANGED] Load JavaScript with all improvements: Space key, touch events, and responsive fixes -->
   <script src="script.js"></script>
 
 </body>

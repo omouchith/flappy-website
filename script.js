@@ -11,7 +11,8 @@ let bird, pipes, score, frame, gameOver, gameStarted;
 // START GAME
 function startGame() {
   document.getElementById("home").style.display = "none";
-  document.getElementById("gameSection").style.display = "block";
+  // [CHANGED] Using class instead of inline styles for better CSS management and mobile responsiveness
+  document.getElementById("gameSection").classList.add("active");
 
   bird = { x: 80, y: 300, r: 20, v: 0 };
   pipes = [];
@@ -28,12 +29,31 @@ function restartGame() {
   location.reload();
 }
 
-// JUMP
-document.addEventListener("click", () => {
+// JUMP - Click, Space, and Touch Events
+// [CHANGED] Refactored jump logic into separate function for reusability across all input methods
+function jump() {
   if (gameStarted && !gameOver) {
     bird.v = -5;
   }
+}
+
+// [CHANGED] Added Space bar support for keyboard control (smoother, same feel as click)
+document.addEventListener("keydown", (e) => {
+  if (e.code === "Space" || e.key === " ") {
+    e.preventDefault(); // Prevent page scroll
+    jump();
+  }
 });
+
+// [CHANGED] Mouse click to jump (original functionality kept)
+document.addEventListener("click", jump);
+
+// [NEW] Touch event support for mobile/tablet devices
+// [CHANGED] Added touchstart listener to enable jumping on touch screens
+canvas.addEventListener("touchstart", (e) => {
+  e.preventDefault(); // Prevent default zoom/scroll behavior
+  jump();
+}, false);
 
 // CREATE PIPES
 function createPipe() {
@@ -97,7 +117,7 @@ if (bird.v > 5) bird.v = 5;
   if (frame % 100 === 0) createPipe();
 
   pipes.forEach(p => {
-    p.x -= 2.5;
+    p.x -= 2                  // pipe speed
 
     // collision
     if (
@@ -143,6 +163,7 @@ if (bird.y < bird.r) {
 // GAME OVER
 function endGame() {
   gameOver = true;
-  document.getElementById("gameOver").style.display = "flex";
+  // [CHANGED] Using class instead of inline styles for consistency and better z-index handling
+  document.getElementById("gameOver").classList.add("active");
   document.getElementById("finalScore").innerText = score;
 }
