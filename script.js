@@ -147,6 +147,3 @@ function endGame() {
   document.getElementById("finalScore").innerText = score;
 }
 
-function goHome() {
-  location.reload();
-}
