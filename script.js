@@ -140,9 +140,13 @@ if (bird.y < bird.r) {
   requestAnimationFrame(update);
 }
 
-// GAME OVER
+
 function endGame() {
   gameOver = true;
   document.getElementById("gameOver").style.display = "flex";
   document.getElementById("finalScore").innerText = score;
+}
+
+function goHome() {
+  location.reload();
 }
